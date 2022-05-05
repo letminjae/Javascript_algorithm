@@ -11,6 +11,14 @@ function solution(arr) {
     }
     answer = min;
     return answer;
+
+    // let answer;
+    // let min = Math.min(...arr); // Math.min 메서드는 인자로만 최솟값을 찾아주기 때문에, 스프레드 문법을 사용해서 배열을 풀어준다.
+    // return answer;
+
+    // let answer;
+    // let min = Math.min.apply(null, arr); //apply 사용해서 첫번째 파라미터 객체, 즉 this는 null 값 부여, 두번째 인자에다 배열 넣기
+    // return answer;
 }
 let arr = [5, 7, 1, 3, 2, 9, 11];
 console.log(solution(arr));
