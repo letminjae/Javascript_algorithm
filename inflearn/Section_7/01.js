@@ -3,9 +3,9 @@ function solution(arr) {
   for (let i = 0; i < arr.length; i++) {
     let idx = i;
     for (let j = i + 1; j < arr.length; j++) {
-      if(arr[j] < arr[idx]) idx = j;
+      if(arr[j] < arr[idx]) idx = j; // 0의 경우, 5 < 13 이기에 idx = 1이 된다. arr[idx] = 5가 되며 이후 for문이 돌고 false 값이 계속나오며 for문 종료 
     }
-    [arr[i], arr[idx]] = [arr[idx], arr[i]];
+    [arr[i], arr[idx]] = [arr[idx], arr[i]]; // 13과 5를 5와 13으로 교체해주면서 answer[0] = 5, answer[1] = 13으로 변경 됨
   }
   return answer;
 }
