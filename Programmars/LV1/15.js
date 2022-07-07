@@ -1,32 +1,26 @@
 // lv1, 체육복
 
 function solution(n, lost, reserve) {
-    let count = n - lost.length;
-    let tmp_lost = [];
-    
-    // lost와 reserve 두 개 모두 속한 애는 여벌 옷이 없는 것과 같다.
-    // 따라서 reserve 배열에서 제거하고, count를 1 증가시킨다.
-    for (let i = 0; i < lost.length; i++) {
-        if (reserve.includes(lost[i])) {
-            reserve = reserve.filter(element => element !== lost[i]);
-            count++;
-        } else {
-            // lost, reverse 두 개 모두에 속하지 않은 원소를 따로 저장해둔다.
-            tmp_lost.push(lost[i]);
-        }
+  var answer = n - lost.length;
+  // 처음 가능한 학생수 = n - lost.length
+
+  let realLost = lost.filter((lostEl) => !reserve.includes(lostEl));
+  let realReserve = reserve.filter((reserveEl) => !lost.includes(reserveEl));
+  answer += lost.length - realLost.length;
+
+  realLost.sort((a, b) => a - b);
+
+  realLost.forEach((l) => {
+    if (realReserve.length === 0) {
+      return;
     }
-    lost = tmp_lost;
-    
-    for (let i = 0; i < lost.length; i++) {
-        if (reserve.includes(lost[i] - 1)) { // 자기보다 왼쪽에 있는 경우
-            reserve = reserve.filter((el) => el !== lost[i] - 1);
-            count++;
-        }
-        else if (reserve.includes(lost[i] + 1)) { // 자기보다 오른쪽에 있는 경우
-            reserve = reserve.filter((el) => el !== lost[i] + 1);
-            count++;
-        }
+    if (realReserve.includes(l - 1)) {
+      realReserve = realReserve.filter((r) => r !== l - 1);
+      answer++;
+    } else if (realReserve.includes(l + 1)) {
+      realReserve = realReserve.filter((r) => r !== l + 1);
+      answer++;
     }
-    
-    return count;
+  });
+  return answer;
 }
